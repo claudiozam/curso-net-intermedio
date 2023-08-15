@@ -33,7 +33,7 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         // POST: ReclamosController1cs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ReclamoViewModel reclamoViewModel)
         {
             try
             {
