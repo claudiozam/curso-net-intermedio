@@ -20,7 +20,8 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         // GET: ReclamosController1cs/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ReclamoViewModel reclamoViewModel = new ReclamoViewModel(id, "Ejemplo1", "Desc1", DateTime.Now, "nuevo");
+            return View(reclamoViewModel);
         }
 
         // GET: ReclamosController1cs/Create
