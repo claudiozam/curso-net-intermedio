@@ -48,13 +48,14 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         // GET: ReclamosController1cs/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ReclamoViewModel reclamoViewModel = new ReclamoViewModel(id, "Ejemplo1", "Desc1", DateTime.Now, "nuevo");
+            return View(reclamoViewModel);
         }
 
         // POST: ReclamosController1cs/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, ReclamoViewModel reclamoViewModel)
         {
             try
             {
