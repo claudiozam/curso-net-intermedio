@@ -8,3 +8,13 @@ CREATE TABLE reclamos (
 	fechaAlta DATETIME,
 	PRIMARY KEY (id)
 );
+
+
+INSERT INTO reclamos (titulo, descripcion, estado, fechaAlta) 
+	VALUES ('ejemplo1', 'desc1', 'nuevo', '20230817');
+	
+UPDATE reclamos SET titulo = 'nuevo titulo' WHERE id = 1;
+
+SELECT id, titulo, descripcion, estado, fechaAlta FROM reclamos WHERE id = 1;
+	
+DELETE FROM reclamos WHERE id = 1;
