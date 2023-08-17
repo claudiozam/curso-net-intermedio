@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\claud\\source\\repos\\WebApplicationSistemaReclamosV2\\wwwroot\\lib\\bootbox\\bootbox.all.js",
+      "PackagePath": "staticwebassets\\lib\\bootbox\\bootbox.all.js"
+    },
+    {
       "Id": "C:\\Users\\claud\\source\\repos\\WebApplicationSistemaReclamosV2\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

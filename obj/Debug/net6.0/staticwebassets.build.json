@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fIULwzgqNaRhyBeC88dOi/sGgcue9aNepKAEzHivDxg=",
+  "Hash": "pmq0xTP2VoMfSC9E+azAT9/5x9PwJW0Dc9zelgQlv4Y=",
   "Source": "WebApplicationSistemaReclamosV2",
   "BasePath": "_content/WebApplicationSistemaReclamosV2",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\claud\\source\\repos\\WebApplicationSistemaReclamosV2\\wwwroot\\lib\\bootbox\\bootbox.all.js",
+      "SourceId": "WebApplicationSistemaReclamosV2",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\claud\\source\\repos\\WebApplicationSistemaReclamosV2\\wwwroot\\",
+      "BasePath": "_content/WebApplicationSistemaReclamosV2",
+      "RelativePath": "lib/bootbox/bootbox.all.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootbox\\bootbox.all.js"
     },
     {
       "Identity": "C:\\Users\\claud\\source\\repos\\WebApplicationSistemaReclamosV2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

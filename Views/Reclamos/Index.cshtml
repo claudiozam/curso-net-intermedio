@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Listado de reclamos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo reclamos</a>
 </p>
 <table class="table table-bordered">
     <thead class="table-dark">
@@ -51,9 +51,25 @@
             <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" }) |
                     @Html.ActionLink("Ver", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-info"}) |
-                    @Html.ActionLink("Borrar", "Delete", new {  id = item.Id }, new { @class = "btn btn-sm btn-danger"})
+                    @Html.ActionLink("Borrar", "Delete", new {  id = item.Id }, new { @class = "btn btn-sm btn-danger btn-borrar"})
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $(function () { //EL HTML DE LA PAGINA ESTA CARGADO OK!!!!
+            $('.btn-borrar').on('click', function (event) { //AGREGO EVENTO CLICK A TODOS LOS BOTONES BORRAR
+                event.preventDefault(); //IMPEDIMOS EJECUTAR EL LINK DE BORRAR POR DEFECTO
+                var urlLinkBorrar = $(this).prop('href'); //RECUPERO LA URL ORIGINAL DEL LINK
+                bootbox.confirm('Borramos el reclamo?', function (result) {
+                    if (result == true) {
+                        window.location = urlLinkBorrar; //EJECUTA EL LINK ORIGINAL DE BORRAR!!
+                    }
+                });
+            });
+        });
+    </script>
+}
