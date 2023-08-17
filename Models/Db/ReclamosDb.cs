@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using WebApplicationSistemaReclamosV2.Models.ViewModels;
 
 namespace WebApplicationSistemaReclamosV2.Models.Db
 {
@@ -12,36 +13,86 @@ namespace WebApplicationSistemaReclamosV2.Models.Db
             return conexion;
         }
 
-        public void AltaDeReclamo()
+        public void AltaDeReclamo(string titulo, string descripcion, string estado, DateTime fechaAlta)
         {
-
-
-            //INSERT INTO reclamos(titulo, descripcion, estado, fechaAlta)
-            //VALUES('ejemplo1', 'desc1', 'nuevo', '20230817');
-            
+            MySqlConnection connection = crearNuevaConexion();
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "INSERT INTO reclamos(titulo, descripcion, estado, fechaAlta) " +
+                " VALUES(@titulo, @descripcion, @estado, @fechaAlta);";
+            cmd.Parameters.AddWithValue("@titulo", titulo);
+            cmd.Parameters.AddWithValue("@descripcion", descripcion);
+            cmd.Parameters.AddWithValue("@estado", estado);
+            cmd.Parameters.AddWithValue("@fechaAlta", fechaAlta);
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
 
-        public void ActualizarReclamo()
+        public void ActualizarReclamo(long id, string titulo, string descripcion, string estado, DateTime fechaAlta)
         {
             //UPDATE reclamos SET titulo = 'nuevo titulo' WHERE id = 1;
-
+            MySqlConnection connection = crearNuevaConexion();
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "UPDATE reclamos SET titulo = @titulo, descripcion = @descripcion, " +
+                " estado = @estado, fechaAlta = @fechaAlta WHERE id = @id;";
+            cmd.Parameters.AddWithValue("@titulo", titulo);
+            cmd.Parameters.AddWithValue("@descripcion", descripcion);
+            cmd.Parameters.AddWithValue("@estado", estado);
+            cmd.Parameters.AddWithValue("@fechaAlta", fechaAlta);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
 
         public void BorrarReclamo(long id)
         {
-            //DELETE FROM reclamos WHERE id = 1;
-
+            MySqlConnection connection = crearNuevaConexion();
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "DELETE FROM reclamos WHERE id = @id;";
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
 
-        public void BuscarReclamoPorId()
+        public ReclamoViewModel BuscarReclamoPorId(long id)
         {
-            //SELECT id, titulo, descripcion, estado, fechaAlta FROM reclamos WHERE id = 1;
-
+            ReclamoViewModel reclamosViewModel = null;
+            MySqlConnection connection = crearNuevaConexion();
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT id, titulo, descripcion, estado, fechaAlta FROM reclamos where id = @id";
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                reclamosViewModel = new ReclamoViewModel() {
+                    Id = dr.GetInt64("id"),
+                    Descripcion = dr.GetString("titulo"),
+                    Estado = dr.GetString("estado"),
+                    FechaAlta = dr.GetDateTime("fechaAlta")
+                };
+            }
+            return reclamosViewModel;
         }
 
-        public void BuscarTodoLosReclamos()
+        public List<ReclamoViewModel> BuscarTodoLosReclamos()
         {
-            //SELECT id, titulo, descripcion, estado, fechaAlta FROM reclamos;
+            List<ReclamoViewModel> reclamosViewModel = new List<ReclamoViewModel>();
+            MySqlConnection connection = crearNuevaConexion();
+            MySqlCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT id, titulo, descripcion, estado, fechaAlta FROM reclamos";
+            MySqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                reclamosViewModel.Add(new ReclamoViewModel()
+                {
+                    Id = dr.GetInt64("id"),
+                    Descripcion = dr.GetString("titulo"),
+                    Estado = dr.GetString("estado"),
+                    FechaAlta = dr.GetDateTime("fechaAlta")
+                });
+            }
+
+            return reclamosViewModel;
+
         }
 
     }
