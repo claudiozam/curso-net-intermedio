@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplicationSistemaReclamosV2.Models.Db;
 using WebApplicationSistemaReclamosV2.Models.ViewModels;
 
 namespace WebApplicationSistemaReclamosV2.Controllers
@@ -9,18 +10,16 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         // GET: ReclamosController1cs
         public ActionResult Index()
         {
-            List<ReclamoViewModel> listReclamos = new List<ReclamoViewModel>();
-            listReclamos.Add(new ReclamoViewModel(1, "Ejemplo1", "Desc1", DateTime.Now, "nuevo"));
-            listReclamos.Add(new ReclamoViewModel(2, "Ejemplo2", "Desc2", DateTime.Now, "nuevo"));
-            listReclamos.Add(new ReclamoViewModel(3, "Ejemplo3", "Desc3", DateTime.Now, "nuevo"));
-
+            ReclamosDb db = new ReclamosDb();
+            List<ReclamoViewModel> listReclamos = db.BuscarTodoLosReclamos();
             return View(listReclamos);
         }
 
         // GET: ReclamosController1cs/Details/5
         public ActionResult Details(int id)
         {
-            ReclamoViewModel reclamoViewModel = new ReclamoViewModel(id, "Ejemplo1", "Desc1", DateTime.Now, "nuevo");
+            ReclamosDb db = new ReclamosDb();
+            ReclamoViewModel reclamoViewModel = db.BuscarReclamoPorId(id);
             return View(reclamoViewModel);
         }
 
@@ -35,20 +34,23 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReclamoViewModel reclamoViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ReclamosDb db = new ReclamosDb();
+            db.AltaDeReclamo(
+                reclamoViewModel.Titulo,
+                reclamoViewModel.Descripcion,
+                "nuevo",
+                DateTime.Now
+            );
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ReclamosController1cs/Edit/5
         public ActionResult Edit(int id)
         {
-            ReclamoViewModel reclamoViewModel = new ReclamoViewModel(id, "Ejemplo1", "Desc1", DateTime.Now, "nuevo");
+            ReclamosDb db = new ReclamosDb();
+            ReclamoViewModel reclamoViewModel = db.BuscarReclamoPorId(id);
+
             return View(reclamoViewModel);
         }
 
@@ -57,20 +59,22 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ReclamoViewModel reclamoViewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ReclamosDb db = new ReclamosDb();
+            db.ActualizarReclamo(id,
+                reclamoViewModel.Titulo,
+                reclamoViewModel.Descripcion,
+                "nuevo",
+                DateTime.Now
+            );
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ReclamosController1cs/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ReclamosDb db = new ReclamosDb();
+            db.BorrarReclamo(id);
+            return RedirectToAction(nameof(Index));
         }
 
 

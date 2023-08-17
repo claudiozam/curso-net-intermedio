@@ -65,7 +65,8 @@ namespace WebApplicationSistemaReclamosV2.Models.Db
             {
                 reclamosViewModel = new ReclamoViewModel() {
                     Id = dr.GetInt64("id"),
-                    Descripcion = dr.GetString("titulo"),
+                    Titulo = dr.GetString("titulo"),
+                    Descripcion = dr.GetString("descripcion"),
                     Estado = dr.GetString("estado"),
                     FechaAlta = dr.GetDateTime("fechaAlta")
                 };
@@ -85,7 +86,8 @@ namespace WebApplicationSistemaReclamosV2.Models.Db
                 reclamosViewModel.Add(new ReclamoViewModel()
                 {
                     Id = dr.GetInt64("id"),
-                    Descripcion = dr.GetString("titulo"),
+                    Titulo = dr.GetString("titulo"),
+                    Descripcion = dr.GetString("descripcion"),
                     Estado = dr.GetString("estado"),
                     FechaAlta = dr.GetDateTime("fechaAlta")
                 });
