@@ -34,15 +34,19 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReclamoViewModel reclamoViewModel)
         {
-            ReclamosDb db = new ReclamosDb();
-            db.AltaDeReclamo(
-                reclamoViewModel.Titulo,
-                reclamoViewModel.Descripcion,
-                "nuevo",
-                DateTime.Now
-            );
+            if(ModelState.IsValid)
+            {
+                ReclamosDb db = new ReclamosDb();
+                db.AltaDeReclamo(
+                    reclamoViewModel.Titulo,
+                    reclamoViewModel.Descripcion,
+                    "nuevo",
+                    DateTime.Now
+                );
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
         // GET: ReclamosController1cs/Edit/5
@@ -59,14 +63,18 @@ namespace WebApplicationSistemaReclamosV2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ReclamoViewModel reclamoViewModel)
         {
-            ReclamosDb db = new ReclamosDb();
-            db.ActualizarReclamo(id,
-                reclamoViewModel.Titulo,
-                reclamoViewModel.Descripcion,
-                "nuevo",
-                DateTime.Now
-            );
-            return RedirectToAction(nameof(Index));
+            if(ModelState.IsValid)
+            {
+                ReclamosDb db = new ReclamosDb();
+                db.ActualizarReclamo(id,
+                    reclamoViewModel.Titulo,
+                    reclamoViewModel.Descripcion,
+                    "nuevo",
+                    DateTime.Now
+                );
+                return RedirectToAction(nameof(Index));
+            }
+            return View(reclamoViewModel);
         }
 
         // GET: ReclamosController1cs/Delete/5
