@@ -9,7 +9,7 @@ namespace WebApplicationSistemaReclamosV2.Models.ViewModels
         private string titulo;
         private string descripcion;
         private DateTime fechaAlta;
-        private string estado;
+        private string estado = "nuevo";
 
         public ReclamoViewModel() { }
 
