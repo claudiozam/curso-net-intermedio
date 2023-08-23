@@ -19,35 +19,43 @@ namespace WebApplicationSistemaReclamosV2.Controllers
 
         // GET api/<ReclamosRestController>/5
         [HttpGet("{id}")]
-        public ReclamoViewModel Get(int id)
+        public IActionResult Get(int id)
         {
             ReclamosDb db = new ReclamosDb();
-            return db.BuscarReclamoPorId(id);
+            ReclamoViewModel reclamoViewModel = db.BuscarReclamoPorId(id);
+            if(reclamoViewModel == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(reclamoViewModel);
         }
 
         // POST api/<ReclamosRestController>
         [HttpPost]
-        public void Post([FromBody] ReclamoViewModel reclamoViewModel)
+        public IActionResult Post([FromBody] ReclamoViewModel reclamoViewModel)
         {
             ReclamosDb db = new ReclamosDb();
             db.AltaDeReclamo(reclamoViewModel.Titulo, reclamoViewModel.Descripcion, "nuevo", DateTime.Now);
+            return Created("", reclamoViewModel);
         }
 
         // PUT api/<ReclamosRestController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ReclamoViewModel reclamoViewModel)
+        public IActionResult Put(int id, [FromBody] ReclamoViewModel reclamoViewModel)
         {
             ReclamosDb db = new ReclamosDb();
             db.ActualizarReclamo(id, reclamoViewModel.Titulo, reclamoViewModel.Descripcion, "nuevo", DateTime.Now);
-
+            return NoContent();
         }
 
         // DELETE api/<ReclamosRestController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             ReclamosDb db = new ReclamosDb();
             db.BorrarReclamo(id);
+            return NoContent();
         }
     }
 }
