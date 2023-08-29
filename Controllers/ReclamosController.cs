@@ -85,6 +85,9 @@ namespace WebApplicationSistemaReclamosV2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        public ActionResult Ejemplo()
+        {
+            return View();
+        }
     }
 }

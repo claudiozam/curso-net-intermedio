@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<input type="text" id="campoIdReclamo" />
+<button id="botonBuscarReclamoPorId" type="button">Buscar por id</button>
+<div id="resultado"></div>
+
+@section Scripts {
+    <script>
+        $(function () { //EL HTML DE LA PAGINA ESTA CARGADO OK!!!!
+            $('#botonBuscarReclamoPorId').on('click', function (event) {
+                event.preventDefault();
+                var idReclamoBuscar = $('#campoIdReclamo').val();
+                console.log('idReclamoBuscar: ' + idReclamoBuscar);
+
+                $.getJSON('/api/reclamosrest/' + idReclamoBuscar, function (resp) {
+                    $('#resultado').html(resp.id + ' ' + resp.titulo);
+                    console.log(resp);
+                });
+            });
+        });
+    </script>
+}
